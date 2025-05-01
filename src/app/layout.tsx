@@ -1,18 +1,12 @@
 import type {Metadata} from 'next';
-import { GeistSans } from 'geist/font/sans'; // Corrected import source
-import { GeistMono } from 'geist/font/mono'; // Corrected import source
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster" // Added import
+import { Toaster } from "@/components/ui/toaster"
 
-const geistSans = GeistSans({ // Use GeistSans directly
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = GeistMono({ // Use GeistMono directly
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// Removed incorrect function calls for Geist fonts.
+// const geistSans = GeistSans({ ... }); was incorrect.
+// const geistMono = GeistMono({ ... }); was incorrect.
 
 export const metadata: Metadata = {
   title: 'Remote AI Assistant', // Updated title
@@ -25,10 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}> {/* Added font-sans */}
+    // Apply font variables directly to the html tag
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      {/* Apply base font style to body */}
+      <body className={`font-sans antialiased`}>
         {children}
-        <Toaster /> {/* Added Toaster */}
+        <Toaster />
       </body>
     </html>
   );
